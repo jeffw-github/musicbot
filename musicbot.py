@@ -3,7 +3,7 @@
 
 import tweepy, sys, time, requests, praw, re
 
-filename=open('tweepyConfig.txt','r')
+filename=open('AuthFiles/tweepyConfig.txt','r')
 f = filename.readlines()
 CONSUMER_KEY = f[0].rstrip('\n')
 CONSUMER_SECRET = f[1].rstrip('\n')
@@ -19,7 +19,7 @@ api = tweepy.API(auth)
 
 def authenticateReddit():
 	print('Authenticating...')
-	reddit = praw.Reddit('musicbot')
+	reddit = praw.Reddit('./AuthFiles/musicbot')
 	return reddit
 
 def post(reddit):
