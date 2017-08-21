@@ -15,8 +15,6 @@ def authenticateTwitter():
 	auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 	api = tweepy.API(auth)
 	return api
- 
-
 
 def authenticateReddit():
 	print('Authenticating...')
@@ -24,38 +22,20 @@ def authenticateReddit():
 	return reddit
 
 def post(reddit, api):
-	# deleteAll()
+	deleteAll(api)
 
-	for item in reddit.subreddit('trap').hot(limit = 25):
-		match = re.findall("https?:\/\/(?:.*\.)?(soundcloud)?(spotify)?\.com\/.*", item.url)
-		if match:
-			print('Posting...')
-			api.update_status("From r/trap " + item.url)
-			time.sleep(30)
+	subreddits = ['trap', 'hiphopheads', 'indieheads', 'electronicmusic']
 
-	for item in reddit.subreddit('hiphopheads').hot(limit = 25):
-		match = re.findall("https?:\/\/(?:.*\.)?(soundcloud)?(spotify)?\.com\/.*", item.url)
-		if match:
-			print('Posting...')
-			api.update_status("From r/hiphopheads " + item.url)
-			time.sleep(30)
-
-	for item in reddit.subreddit('indieheads').hot(limit = 25):
-		match = re.findall("https?:\/\/(?:.*\.)?(soundcloud)?(spotify)?\.com\/.*", item.url)
-		if match:
-			print('Posting...')
-			api.update_status("From r/indieheads " + item.url)
-			time.sleep(30)
-
-	for item in reddit.subreddit('electronicmusic').hot(limit = 25):
-		match = re.findall("https?:\/\/(?:.*\.)?(soundcloud)?(spotify)?\.com\/.*", item.url)
-		if match:
-			print('Posting...')
-			api.update_status("From r/electronicmusic " + item.url)
-			time.sleep(30)
+	for sr in subreddits:
+		for item in reddit.subreddit(sr).hot(limit = 25):
+			match = re.findall("https?:\/\/(?:.*\.)?(soundcloud)?(spotify)?\.com\/.*", item.url)
+			if match:
+				print('Posting...')
+				api.update_status("From r/" + sr + " " + item.url)
+				time.sleep(30)
 
 
-def deleteAll():
+def deleteAll(api):
 	for status in tweepy.Cursor(api.user_timeline).items():
 	    try:
 	        api.destroy_status(status.id)
