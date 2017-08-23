@@ -22,12 +22,12 @@ def authenticateReddit():
 	return reddit
 
 def post(reddit, api):
-	deleteAll(api)
+	# deleteAll(api)
 
 	subreddits = ['trap', 'hiphopheads', 'indieheads', 'electronicmusic']
 
 	for sr in subreddits:
-		for item in reddit.subreddit(sr).hot(limit = 25):
+		for item in reddit.subreddit(sr).hot(limit = 15):
 			match = re.findall("https?:\/\/(?:.*\.)?(soundcloud)?(spotify)?\.com\/.*", item.url)
 			if match:
 				print('Posting...')
@@ -46,9 +46,7 @@ def main():
 	reddit = authenticateReddit()
 	api = authenticateTwitter()
 	post(reddit, api)
-	
+
 
 if __name__ == '__main__':
 	main()
-
-
