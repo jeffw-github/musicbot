@@ -10,3 +10,4 @@ Helps you keep up with new music everyday
 - [/r/trap](https://www.reddit.com/r/trap/)
 - [/r/hiphopheads](https://www.reddit.com/r/hiphopheads/) 
 - [/r/indieheads](https://www.reddit.com/r/indieheads/)
+- [/r/electronicmusic](https://www.reddit.com/r/electronicmusic/)
