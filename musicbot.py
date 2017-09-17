@@ -17,21 +17,21 @@ def authenticateTwitter():
 	return api
 
 def authenticateReddit():
-	print('Authenticating...')
+	# print('Authenticating...')
 	reddit = praw.Reddit('musicbot')
 	return reddit
 
 def post(reddit, api):
 	# deleteAll(api)
 
-	subreddits = ['trap', 'hiphopheads', 'indieheads', 'electronicmusic']
+	subreddits = ['indieheads', 'hiphopheads', 'electronicmusic', 'trap']
 
 	for sr in subreddits:
 		for item in reddit.subreddit(sr).hot(limit = 15):
 			match = re.findall("https?:\/\/(?:.*\.)?(soundcloud)?(spotify)?\.com\/.*", item.url)
 			if match:
-				print('Posting...')
-				api.update_status("From r/" + sr + " " + item.url)
+				# print('Posting...')
+				api.update_status(item.title + " (r/" + sr + ") " + item.url)
 				time.sleep(30)
 
 
@@ -45,7 +45,10 @@ def deleteAll(api):
 def main():
 	reddit = authenticateReddit()
 	api = authenticateTwitter()
-	post(reddit, api)
+	while True: 
+		post(reddit, api)
+		# time.sleep(86400)
+	
 
 
 if __name__ == '__main__':
