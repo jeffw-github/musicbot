@@ -30,8 +30,21 @@ def post(reddit, api):
 		for item in reddit.subreddit(sr).hot(limit = 15):
 			match = re.findall("https?:\/\/(?:.*\.)?(soundcloud)?(spotify)?\.com\/.*", item.url)
 			if match:
-				# print('Posting...')
-				api.update_status(item.title + " (r/" + sr + ") " + item.url)
+				print('Posting...')
+				postText = item.title + " (r/" + sr + ") " + item.url
+
+				# shorten title with post text over 140 by adding ..
+				# twitter counts all url as 23 characters
+				if len(postText) - len(item.url) + 23 > 140:
+					lenToRemove = len(postText) - 140
+					postText = item.title[:lenToRemove + 2] + ".." + " (r/" + sr + ") " + item.url
+				try:
+					api.update_status(postText)
+					print('Posted!')
+				except:
+					# see what exception is being passed
+					print(Exception)
+					pass
 				time.sleep(30)
 
 
@@ -47,7 +60,7 @@ def main():
 	api = authenticateTwitter()
 	while True: 
 		post(reddit, api)
-		# time.sleep(86400)
+		time.sleep(86400)
 	
 
 
