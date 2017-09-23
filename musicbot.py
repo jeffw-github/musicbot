@@ -42,7 +42,7 @@ def post(reddit, api):
 					api.update_status(postText)
 					print('Posted!')
 				except:
-					# see what exception is being passed
+					# TODO: see what exception is being passed
 					print(Exception)
 					pass
 				time.sleep(30)
