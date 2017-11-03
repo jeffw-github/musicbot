@@ -1,5 +1,5 @@
 # Twitter Music Bot
-Python Bot that tweets music from various subreddits (from Soundcloud and Spotify currently) in Python 3
+Python Bot that tweets top music of the day from various subreddits with Soundcloud or Spotify links
 
 Check it out here https://twitter.com/bottomlessbois
 
